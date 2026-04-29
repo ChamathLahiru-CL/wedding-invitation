@@ -41,8 +41,16 @@ export default async function GuestInvitation({ params }) {
                         Dear {guestName},
                     </p>
 
+                    <div className="flex justify-center mb-8 animate-fadeIn" style={{ animationDelay: "0.15s" }}>
+                        <img
+                            src="/headerSection.png"
+                            alt=""
+                            className="w-64 md:w-80 lg:w-96 h-auto opacity-95 drop-shadow-[0_18px_36px_rgba(50,34,28,0.14)]"
+                        />
+                    </div>
+
                     {/* Couple Names - Main Focus */}
-                    <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fadeIn whitespace-nowrap" style={{ animationDelay: "0.2s" }}>
+                    <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fadeIn whitespace-nowrap" style={{ animationDelay: "0.25s" }}>
                         <span className="text-[#4f6f2f]">Priyanjalee</span><span className="text-[#d4a574]"> & </span><span className="text-[#4f6f2f]">Dhanushka</span>
                     </h1>
 
