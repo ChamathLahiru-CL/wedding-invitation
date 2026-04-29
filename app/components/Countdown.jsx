@@ -29,10 +29,10 @@ const countdownStyles = `
 
   @keyframes glow {
     0%, 100% {
-      box-shadow: 0 0 20px rgba(79, 111, 47, 0.3), 0 20px 40px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 12px 28px rgba(107, 79, 63, 0.14), 0 4px 10px rgba(107, 79, 63, 0.08);
     }
     50% {
-      box-shadow: 0 0 30px rgba(79, 111, 47, 0.5), 0 20px 50px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 18px 36px rgba(107, 79, 63, 0.18), 0 6px 14px rgba(107, 79, 63, 0.12);
     }
   }
 
@@ -62,7 +62,7 @@ const countdownStyles = `
   .countdown-box:nth-child(4) { animation-delay: 0.3s, 0.9s; }
 
   .countdown-box:hover {
-    animation: glow 0.6s ease-in-out !important;
+    animation: glow 1.2s ease-in-out infinite;
   }
 `;
 
@@ -104,7 +104,7 @@ export default function Countdown() {
                 ].map(([label, value]) => (
                     <div
                         key={label}
-                        className="countdown-box group relative w-28 h-28 rounded-3xl bg-gradient-to-br from-white/95 via-white/90 to-white/85 backdrop-blur-md shadow-2xl hover:shadow-3xl hover:scale-110 transition-all duration-300 ease-out flex flex-col items-center justify-center border border-white/40 overflow-hidden cursor-pointer"
+                        className="countdown-box group relative w-28 h-28 rounded-3xl bg-gradient-to-br from-white/95 via-white/90 to-white/85 backdrop-blur-md shadow-[0_12px_28px_rgba(107,79,63,0.14)] hover:shadow-[0_18px_36px_rgba(107,79,63,0.18)] hover:scale-[1.06] transition-all duration-300 ease-out flex flex-col items-center justify-center border border-white/40 overflow-hidden cursor-pointer"
                     >
                         <div className="absolute inset-0 bg-gradient-to-tr from-[#4f6f2f]/5 to-[#d4a574]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                         <div className="relative z-10 flex flex-col items-center justify-center h-full">
