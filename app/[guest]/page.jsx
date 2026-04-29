@@ -21,6 +21,15 @@ export default async function GuestInvitation({ params }) {
                 <div className="absolute bottom-32 right-12 w-8 h-8 text-[#d4a574] opacity-40 text-3xl animate-bounce">✨</div>
 
                 <div className="text-center max-w-5xl w-full z-10">
+
+                    {/* Side background images (decorative) */}
+                    <div className="absolute left-12 top-1/2 -translate-y-1/2 hidden md:block z-0 pointer-events-none select-none opacity-90">
+                        <img src="/LeftSide.png" alt="" className="h-[520px] w-auto mix-blend-multiply opacity-90" />
+                    </div>
+
+                    <div className="absolute right-12 top-1/2 -translate-y-1/2 hidden md:block z-0 pointer-events-none select-none opacity-90">
+                        <img src="/RightSide.png" alt="" className="h-[520px] w-auto mix-blend-multiply opacity-90" />
+                    </div>
                     {/* Greeting */}
                     <p className="text-2xl md:text-3xl text-red-800 font-serif mb-8 opacity-90 animate-fadeIn">
                         Dear {guestName},
