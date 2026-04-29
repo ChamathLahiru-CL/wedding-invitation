@@ -20,17 +20,15 @@ export default async function GuestInvitation({ params }) {
                 <div className="absolute bottom-20 left-10 w-8 h-8 text-[#4f6f2f] opacity-40 text-3xl" style={{ animation: "bounce 2s infinite 0.6s" }}>🌿</div>
                 <div className="absolute bottom-32 right-12 w-8 h-8 text-[#d4a574] opacity-40 text-3xl animate-bounce">✨</div>
 
-                <div className="text-center max-w-2xl z-10">
+                <div className="text-center max-w-5xl w-full z-10">
                     {/* Greeting */}
                     <p className="text-2xl md:text-3xl text-red-800 font-serif mb-8 opacity-90 animate-fadeIn">
                         Dear {guestName},
                     </p>
 
                     {/* Couple Names - Main Focus */}
-                    <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fadeIn" style={{ animationDelay: "0.2s" }}>
-                        <span className="text-[#4f6f2f]">Priyanjalee</span>
-                        <span className="text-[#d4a574]"> & </span>
-                        <span className="text-[#4f6f2f]">Dhanushka</span>
+                    <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fadeIn whitespace-nowrap" style={{ animationDelay: "0.2s" }}>
+                        <span className="text-[#4f6f2f]">Priyanjalee</span><span className="text-[#d4a574]"> & </span><span className="text-[#4f6f2f]">Dhanushka</span>
                     </h1>
 
                     {/* Invitation Text */}
