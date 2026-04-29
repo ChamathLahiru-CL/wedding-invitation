@@ -16,8 +16,8 @@ export default async function GuestInvitation({ params }) {
             <section className="min-h-screen flex flex-col items-center justify-center px-4 relative overflow-hidden">
                 {/* Decorative Elements */}
                 <div className="absolute top-10 left-5 w-8 h-8 text-[#4f6f2f] opacity-40 text-3xl animate-bounce">🌿</div>
-                <div className="absolute top-20 right-8 w-8 h-8 text-[#d4a574] opacity-40 text-3xl" style={{animation: "bounce 2s infinite 0.3s"}}>✨</div>
-                <div className="absolute bottom-20 left-10 w-8 h-8 text-[#4f6f2f] opacity-40 text-3xl" style={{animation: "bounce 2s infinite 0.6s"}}>🌿</div>
+                <div className="absolute top-20 right-8 w-8 h-8 text-[#d4a574] opacity-40 text-3xl" style={{ animation: "bounce 2s infinite 0.3s" }}>✨</div>
+                <div className="absolute bottom-20 left-10 w-8 h-8 text-[#4f6f2f] opacity-40 text-3xl" style={{ animation: "bounce 2s infinite 0.6s" }}>🌿</div>
                 <div className="absolute bottom-32 right-12 w-8 h-8 text-[#d4a574] opacity-40 text-3xl animate-bounce">✨</div>
 
                 <div className="text-center max-w-2xl z-10">
@@ -27,19 +27,19 @@ export default async function GuestInvitation({ params }) {
                     </p>
 
                     {/* Couple Names - Main Focus */}
-                    <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fadeIn" style={{animationDelay: "0.2s"}}>
+                    <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fadeIn" style={{ animationDelay: "0.2s" }}>
                         <span className="text-[#4f6f2f]">Priyanjalee</span>
                         <span className="text-[#d4a574]"> & </span>
                         <span className="text-[#4f6f2f]">Dhanushka</span>
                     </h1>
 
                     {/* Invitation Text */}
-                    <p className="mt-8 text-lg md:text-xl text-[#6b4f3f] font-light mb-12 animate-fadeIn" style={{animationDelay: "0.4s"}}>
+                    <p className="mt-8 text-lg md:text-xl text-[#6b4f3f] font-light mb-12 animate-fadeIn" style={{ animationDelay: "0.4s" }}>
                         We warmly invite you to celebrate our wedding day.
                     </p>
 
                     {/* Countdown - Eye Catching */}
-                    <div className="animate-fadeIn" style={{animationDelay: "0.6s"}}>
+                    <div className="animate-fadeIn" style={{ animationDelay: "0.6s" }}>
                         <Countdown />
                     </div>
 
