@@ -1,0 +1,104 @@
+import { initializeApp } from "firebase/app";
+import { getFirestore, doc, setDoc } from "firebase/firestore";
+
+// 🔥 paste your firebase config here
+const firebaseConfig = {
+  apiKey: "AIzaSyBzJhCktdLuyvF5nhzE0bjCXXfaZFq4anw",
+  authDomain: "wedding-invitation-7d82c.firebaseapp.com",
+  projectId: "wedding-invitation-7d82c",
+  storageBucket: "wedding-invitation-7d82c.firebasestorage.app",
+  messagingSenderId: "955782795165",
+  appId: "1:955782795165:web:d088400194f4780ac86974",
+  measurementId: "G-9Z7V1957DN"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// 👉 Paste your JSON here
+const guests = [
+ 
+ {
+   "Guest Name": "Sanduni & Family",
+   "URL Name": "sanduni-family",
+   "Phone": {
+      "WhatsApp": 94712345678
+   },
+   "Status": "Pending",
+   "Attending": "",
+   "Submitted At": ""
+},
+ {
+   "Guest Name": "Chathura ",
+   "URL Name": "chathura",
+   "Phone": {
+      "WhatsApp": 94723456789
+   },
+   "Status": "Pending",
+   "Attending": "",
+   "Submitted At": ""
+},
+ {
+   "Guest Name": "Dilshan",
+   "URL Name": "dilshan",
+   "Phone": {
+      "WhatsApp": 94774567890
+   },
+   "Status": "Pending",
+   "Attending": "",
+   "Submitted At": ""
+},
+ {
+   "Guest Name": "Amaya",
+   "URL Name": "amaya",
+   "Phone": {
+      "WhatsApp": 94712345678
+   },
+   "Status": "Pending",
+   "Attending": "",
+   "Submitted At": ""
+},
+ {
+   "Guest Name": "Tharindu & Nethmi",
+   "URL Name": "tharindu-nethmi",
+   "Phone": {
+      "WhatsApp": 94723456789
+   },
+   "Status": "Pending",
+   "Attending": "",
+   "Submitted At": ""
+},
+ {
+   "Guest Name": "Ishara Family",
+   "URL Name": "ishara-family",
+   "Phone": {
+      "WhatsApp": 94774567890
+   },
+   "Status": "Pending",
+   "Attending": "",
+   "Submitted At": ""
+}
+];
+
+async function importData() {
+  for (const guest of guests) {
+await setDoc(doc(db, "guests", guest["URL Name"]), {
+  name: guest["Guest Name"] || "",
+  phone: guest.Phone?.WhatsApp
+      ? `+${guest.Phone.WhatsApp.toString()}`
+      : "",
+  status: "Pending",
+  attending: null,
+  submittedAt: null,
+}, 
+{ merge: true } // keep existing data
+
+);
+
+    console.log("Added:", guest["Guest Name"]);
+  }
+
+  console.log("Import completed ✅");
+}
+
+importData();
