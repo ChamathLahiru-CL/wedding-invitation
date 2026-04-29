@@ -11,9 +11,15 @@ export default async function GuestInvitation({ params }) {
         .join(" ");
 
     return (
-        <main className="bg-[#f8f5ef]">
+        <main className="bg-[#f8f5ef] relative overflow-hidden">
+            {/* Site Background Image */}
+            <div
+                className="fixed inset-0 bg-center bg-no-repeat bg-cover opacity-70 pointer-events-none z-0"
+                style={{ backgroundImage: "url('/BackgroundImage.png')" }}
+            ></div>
+            <div className="fixed inset-0 bg-gradient-to-b from-[#f8f5ef]/18 via-[#f8f5ef]/14 to-[#f8f5ef]/22 pointer-events-none z-0"></div>
             {/* Hero Section - Full Viewport */}
-            <section className="min-h-screen flex flex-col items-center justify-center px-4 relative overflow-hidden">
+            <section className="min-h-screen flex flex-col items-center justify-center px-4 relative overflow-hidden z-10">
                 {/* Decorative Elements */}
                 <div className="absolute top-10 left-5 w-8 h-8 text-[#4f6f2f] opacity-40 text-3xl animate-bounce">🌿</div>
                 <div className="absolute top-20 right-8 w-8 h-8 text-[#d4a574] opacity-40 text-3xl" style={{ animation: "bounce 2s infinite 0.3s" }}>✨</div>
@@ -61,12 +67,12 @@ export default async function GuestInvitation({ params }) {
             </section>
 
             {/* Event Details Section */}
-            <section className="min-h-screen flex flex-col items-center justify-center px-4 py-20">
+            <section className="min-h-screen flex flex-col items-center justify-center px-4 py-20 relative z-10">
                 <EventDetails />
             </section>
 
             {/* RSVP Section */}
-            <section className="min-h-screen flex flex-col items-center justify-center px-4 py-20">
+            <section className="min-h-screen flex flex-col items-center justify-center px-4 py-20 relative z-10">
                 <RSVPForm guestName={guestName} />
             </section>
 
