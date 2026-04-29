@@ -1,6 +1,12 @@
 import Countdown from "../components/Countdown";
 import EventDetails from "../components/EventDetails";
 import RSVPForm from "../components/RSVPForm";
+import { Great_Vibes } from "next/font/google";
+
+const greatVibes = Great_Vibes({
+    weight: "400",
+    subsets: ["latin"],
+});
 
 export default async function GuestInvitation({ params }) {
     const { guest } = await params;
@@ -37,9 +43,11 @@ export default async function GuestInvitation({ params }) {
                         <img src="/RightSide.png" alt="" className="h-[520px] w-auto mix-blend-multiply opacity-90" />
                     </div>
                     {/* Greeting */}
-                    <p className="text-2xl md:text-3xl text-red-800 font-serif mb-8 opacity-90 animate-fadeIn">
-                        Dear {guestName},
-                    </p>
+                    <div className="mb-8 flex justify-center animate-fadeIn">
+                        <p className={`${greatVibes.className} text-[#7b2027] text-5xl md:text-6xl lg:text-7xl leading-none drop-shadow-[0_8px_18px_rgba(50,34,28,0.12)]`}>
+                            Dear {guestName},
+                        </p>
+                    </div>
 
                     <div className="flex justify-center mb-8 animate-fadeIn" style={{ animationDelay: "0.15s" }}>
                         <img
