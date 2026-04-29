@@ -68,7 +68,17 @@ export default async function GuestInvitation({ params }) {
 
             {/* Event Details Section */}
             <section className="min-h-screen flex flex-col items-center justify-center px-4 py-20 relative z-10">
-                <EventDetails />
+                <div className="absolute inset-0 pointer-events-none z-0">
+                    <div className="absolute left-10 bottom-0 hidden lg:block opacity-90">
+                        <img src="/LeftSide2.png" alt="" className="h-[520px] w-auto mix-blend-multiply opacity-90" />
+                    </div>
+                    <div className="absolute right-10 bottom-0 hidden lg:block opacity-90">
+                        <img src="/RightSide2.png" alt="" className="h-[520px] w-auto mix-blend-multiply opacity-90" />
+                    </div>
+                </div>
+                <div className="relative z-10 w-full">
+                    <EventDetails />
+                </div>
             </section>
 
             {/* RSVP Section */}
