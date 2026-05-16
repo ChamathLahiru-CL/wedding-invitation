@@ -1,6 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Playfair_Display } from "next/font/google";
+
+const playfair = Playfair_Display({ subsets: ["latin"] });
 
 const countdownStyles = `
   @keyframes flip {
@@ -29,10 +32,10 @@ const countdownStyles = `
 
   @keyframes glow {
     0%, 100% {
-      box-shadow: 0 0 20px rgba(79, 111, 47, 0.3), 0 20px 40px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 12px 28px rgba(107, 79, 63, 0.14), 0 4px 10px rgba(107, 79, 63, 0.08);
     }
     50% {
-      box-shadow: 0 0 30px rgba(79, 111, 47, 0.5), 0 20px 50px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 18px 36px rgba(107, 79, 63, 0.18), 0 6px 14px rgba(107, 79, 63, 0.12);
     }
   }
 
@@ -62,62 +65,62 @@ const countdownStyles = `
   .countdown-box:nth-child(4) { animation-delay: 0.3s, 0.9s; }
 
   .countdown-box:hover {
-    animation: glow 0.6s ease-in-out !important;
+    animation: glow 1.2s ease-in-out infinite;
   }
 `;
 
 export default function Countdown() {
-    const weddingDate = new Date("2026-08-03T09:30:00").getTime();
+  const weddingDate = new Date("2026-08-03T09:30:00").getTime();
 
-    const [timeLeft, setTimeLeft] = useState({
-        days: 0,
-        hours: 0,
-        minutes: 0,
-        seconds: 0,
-    });
+  const [timeLeft, setTimeLeft] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
 
-    useEffect(() => {
-        const timer = setInterval(() => {
-            const now = new Date().getTime();
-            const distance = weddingDate - now;
+  useEffect(() => {
+    const timer = setInterval(() => {
+      const now = new Date().getTime();
+      const distance = weddingDate - now;
 
-            setTimeLeft({
-                days: Math.floor(distance / (1000 * 60 * 60 * 24)),
-                hours: Math.floor((distance / (1000 * 60 * 60)) % 24),
-                minutes: Math.floor((distance / (1000 * 60)) % 60),
-                seconds: Math.floor((distance / 1000) % 60),
-            });
-        }, 1000);
+      setTimeLeft({
+        days: Math.floor(distance / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((distance / (1000 * 60 * 60)) % 24),
+        minutes: Math.floor((distance / (1000 * 60)) % 60),
+        seconds: Math.floor((distance / 1000) % 60),
+      });
+    }, 1000);
 
-        return () => clearInterval(timer);
-    }, []);
+    return () => clearInterval(timer);
+  }, []);
 
-    return (
-        <>
-            <style>{countdownStyles}</style>
-            <div className="mt-16 flex justify-center gap-4 px-4 flex-wrap">
-                {[
-                    ["Days", timeLeft.days],
-                    ["Hours", timeLeft.hours],
-                    ["Minutes", timeLeft.minutes],
-                    ["Seconds", timeLeft.seconds],
-                ].map(([label, value]) => (
-                    <div
-                        key={label}
-                        className="countdown-box group relative w-28 h-28 rounded-3xl bg-gradient-to-br from-white/95 via-white/90 to-white/85 backdrop-blur-md shadow-2xl hover:shadow-3xl hover:scale-110 transition-all duration-300 ease-out flex flex-col items-center justify-center border border-white/40 overflow-hidden cursor-pointer"
-                    >
-                        <div className="absolute inset-0 bg-gradient-to-tr from-[#4f6f2f]/5 to-[#d4a574]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        <div className="relative z-10 flex flex-col items-center justify-center h-full">
-                            <p className="countdown-number text-4xl font-bold bg-gradient-to-r from-[#4f6f2f] to-[#6b8e3f] bg-clip-text text-transparent">
-                                {value.toString().padStart(2, '0')}
-                            </p>
-                            <p className="text-xs tracking-widest uppercase font-semibold text-[#6b4f3f]/70 mt-2 group-hover:text-[#6b4f3f] transition-colors duration-300">
-                                {label}
-                            </p>
-                        </div>
-                    </div>
-                ))}
+  return (
+    <>
+      <style>{countdownStyles}</style>
+      <div className="mt-8 sm:mt-16 flex justify-center gap-2 sm:gap-4 px-2 sm:px-4 flex-wrap">
+        {[
+          ["Days", timeLeft.days],
+          ["Hours", timeLeft.hours],
+          ["Minutes", timeLeft.minutes],
+          ["Seconds", timeLeft.seconds],
+        ].map(([label, value]) => (
+          <div
+            key={label}
+            className="countdown-box group relative w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-white/95 via-white/90 to-white/85 backdrop-blur-md shadow-[0_12px_28px_rgba(107,79,63,0.14)] hover:shadow-[0_18px_36px_rgba(107,79,63,0.18)] hover:scale-[1.06] transition-all duration-300 ease-out flex flex-col items-center justify-center border border-white/40 overflow-hidden cursor-pointer"
+          >
+            <div className="absolute inset-0 bg-gradient-to-tr from-[#4f6f2f]/5 to-[#d4a574]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div className="relative z-10 flex flex-col items-center justify-center h-full">
+              <p className={`countdown-number text-3xl sm:text-4xl md:text-5xl font-semibold tracking-wide ${playfair.className} text-[#4f6f2f]`}>
+                {value.toString().padStart(2, '0')}
+              </p>
+              <p className="text-[10px] sm:text-xs md:text-sm tracking-widest uppercase font-bold text-[#6b4f3f] mt-2 group-hover:text-[#4f6f2f] transition-colors duration-300">
+                {label}
+              </p>
             </div>
-        </>
-    );
+          </div>
+        ))}
+      </div>
+    </>
+  );
 }

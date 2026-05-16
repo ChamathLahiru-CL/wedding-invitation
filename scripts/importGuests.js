@@ -17,10 +17,13 @@ const db = getFirestore(app);
 
 // 👉 Paste your JSON here
 const guests = [
- 
- {
+  // Add your guests here
+  // For TWO people: use "-and-" in URL Name (e.g., "tharindu-and-nethmi" → "Tharindu & Nethmi")
+  // For ONE person/family: use "-" in URL Name (e.g., "tharindu-family" → "Tharindu Family")
+
+  {
    "Guest Name": "Sanduni & Family",
-   "URL Name": "sanduni-family",
+   "URL Name": "sanduni-and-family",
    "Phone": {
       "WhatsApp": 94712345678
    },
@@ -60,7 +63,7 @@ const guests = [
 },
  {
    "Guest Name": "Tharindu & Nethmi",
-   "URL Name": "tharindu-nethmi",
+   "URL Name": "tharindu-and-nethmi",
    "Phone": {
       "WhatsApp": 94723456789
    },
@@ -70,7 +73,7 @@ const guests = [
 },
  {
    "Guest Name": "Ishara Family",
-   "URL Name": "ishara-family",
+   "URL Name": "ishara-and-family",
    "Phone": {
       "WhatsApp": 94774567890
    },
@@ -79,6 +82,11 @@ const guests = [
    "Submitted At": ""
 }
 ];
+
+// Example formats:
+// Single person: { "Guest Name": "Chathura", "URL Name": "chathura", "Phone": { "WhatsApp": 94723456789 } }
+// Family: { "Guest Name": "Sanduni Family", "URL Name": "sanduni-family", "Phone": { "WhatsApp": 94712345678 } }
+// Two people: { "Guest Name": "Tharindu & Nethmi", "URL Name": "tharindu-and-nethmi", "Phone": { "WhatsApp": 94723456789 } }
 
 async function importData() {
   for (const guest of guests) {
