@@ -1,6 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Playfair_Display } from "next/font/google";
+
+const playfair = Playfair_Display({ subsets: ["latin"] });
 
 const countdownStyles = `
   @keyframes flip {
@@ -108,10 +111,10 @@ export default function Countdown() {
                     >
                         <div className="absolute inset-0 bg-gradient-to-tr from-[#4f6f2f]/5 to-[#d4a574]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                         <div className="relative z-10 flex flex-col items-center justify-center h-full">
-                            <p className="countdown-number text-4xl font-bold bg-gradient-to-r from-[#4f6f2f] to-[#6b8e3f] bg-clip-text text-transparent">
+                            <p className={`countdown-number text-5xl font-semibold tracking-wide ${playfair.className} text-[#4f6f2f]`}>
                                 {value.toString().padStart(2, '0')}
                             </p>
-                            <p className="text-xs tracking-widest uppercase font-semibold text-[#6b4f3f]/70 mt-2 group-hover:text-[#6b4f3f] transition-colors duration-300">
+                            <p className="text-sm tracking-widest uppercase font-bold text-[#6b4f3f] mt-2 group-hover:text-[#4f6f2f] transition-colors duration-300">
                                 {label}
                             </p>
                         </div>
