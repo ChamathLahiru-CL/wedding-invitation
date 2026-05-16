@@ -98,7 +98,7 @@ export default function Countdown() {
   return (
     <>
       <style>{countdownStyles}</style>
-      <div className="mt-12 sm:mt-16 flex justify-center gap-3 sm:gap-4 px-4 flex-wrap">
+      <div className="mt-8 sm:mt-16 flex justify-center gap-2 sm:gap-4 px-2 sm:px-4 flex-wrap">
         {[
           ["Days", timeLeft.days],
           ["Hours", timeLeft.hours],

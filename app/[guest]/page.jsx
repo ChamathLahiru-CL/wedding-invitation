@@ -25,7 +25,7 @@ export default async function GuestInvitation({ params }) {
             ></div>
             <div className="fixed inset-0 bg-gradient-to-b from-[#f8f5ef]/18 via-[#f8f5ef]/14 to-[#f8f5ef]/22 pointer-events-none z-0"></div>
             {/* Hero Section - Full Viewport */}
-            <section className="min-h-screen flex flex-col items-center justify-center px-4 py-16 sm:py-20 relative overflow-hidden z-10">
+            <section className="min-h-screen flex flex-col items-center justify-center px-2 sm:px-4 py-12 sm:py-20 relative overflow-hidden z-10">
                 {/* Decorative Elements */}
                 <div className="hidden sm:block absolute top-10 left-5 w-8 h-8 text-[#4f6f2f] opacity-40 text-3xl animate-bounce">🌿</div>
                 <div className="hidden sm:block absolute top-20 right-8 w-8 h-8 text-[#d4a574] opacity-40 text-3xl" style={{ animation: "bounce 2s infinite 0.3s" }}>✨</div>
@@ -35,6 +35,13 @@ export default async function GuestInvitation({ params }) {
                 <div className="text-center max-w-5xl w-full z-10">
 
                     {/* Side background images (decorative) */}
+                    <div className="absolute left-3 top-1/2 -translate-y-1/2 sm:hidden z-0 pointer-events-none select-none opacity-70">
+                        <img src="/LeftSide.png" alt="" className="h-40 w-auto mix-blend-multiply" />
+                    </div>
+                    <div className="absolute right-3 top-1/2 -translate-y-1/2 sm:hidden z-0 pointer-events-none select-none opacity-75">
+                        <img src="/RightSide.png" alt="" className="h-40 w-auto mix-blend-multiply" />
+                    </div>
+
                     <div className="absolute left-12 top-1/2 -translate-y-1/2 hidden lg:block z-0 pointer-events-none select-none opacity-90">
                         <img src="/LeftSide.png" alt="" className="h-[520px] w-auto mix-blend-multiply opacity-90" />
                     </div>
@@ -43,13 +50,13 @@ export default async function GuestInvitation({ params }) {
                         <img src="/RightSide.png" alt="" className="h-[520px] w-auto mix-blend-multiply opacity-90" />
                     </div>
                     {/* Greeting */}
-                    <div className="mb-8 flex justify-center animate-fadeIn">
-                        <p className={`${greatVibes.className} text-[#7b2027] text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-none drop-shadow-[0_8px_18px_rgba(50,34,28,0.12)]`}>
+                    <div className="mb-4 flex justify-center animate-fadeIn">
+                        <p className={`${greatVibes.className} text-[#7b2027] text-3xl sm:text-5xl md:text-6xl lg:text-7xl leading-none drop-shadow-[0_8px_18px_rgba(50,34,28,0.12)]`}>
                             Dear {guestName},
                         </p>
                     </div>
 
-                    <div className="flex justify-center mb-8 animate-fadeIn" style={{ animationDelay: "0.15s" }}>
+                    <div className="flex justify-center mb-3 animate-fadeIn" style={{ animationDelay: "0.15s" }}>
                         <img
                             src="/headerSection.png"
                             alt=""
@@ -58,15 +65,32 @@ export default async function GuestInvitation({ params }) {
                     </div>
 
                     {/* Couple Names - Main Focus */}
-                    <h1 className="text-3xl sm:text-6xl md:text-7xl font-bold mb-6 animate-fadeIn whitespace-normal sm:whitespace-nowrap leading-tight" style={{ animationDelay: "0.25s" }}>
+                    <h1 className="text-2xl sm:text-6xl md:text-7xl font-bold mb-2 animate-fadeIn whitespace-normal sm:whitespace-nowrap leading-tight" style={{ animationDelay: "0.25s" }}>
                         <span className="block sm:inline text-[#4f6f2f]">Thejani</span>
-                        <span className="block sm:inline sm:mx-2 md:mx-3 text-2xl sm:text-5xl md:text-7xl text-[#d4a574]">&</span>
+                        <span className="block sm:inline sm:mx-2 md:mx-3 text-xl sm:text-5xl md:text-7xl text-[#d4a574]">&</span>
                         <span className="block sm:inline text-[#4f6f2f]">Dhanushka</span>
                     </h1>
 
                     {/* Invitation Text */}
-                    <p className="mt-6 sm:mt-8 text-base sm:text-lg md:text-xl text-[#6b4f3f] font-light mb-10 sm:mb-12 animate-fadeIn" style={{ animationDelay: "0.4s" }}>
-                        We warmly invite you to celebrate our wedding day.
+                    <p className="mt-4 sm:mt-8 text-sm sm:text-lg md:text-xl text-[#6b4f3f] font-light mb-8 sm:mb-12 animate-fadeIn px-4 sm:px-0 leading-relaxed" style={{ animationDelay: "0.4s" }}>
+                        <span className="block">
+                            <span className="hidden sm:block">"With hearts full of love,</span>
+                            <span className="hidden sm:block">we step into forever beneath the stars."</span>
+                            <span className="sm:hidden">With hearts full of love,</span>
+                            <span className="sm:hidden">we step into forever</span>
+                            <span className="sm:hidden">beneath the stars."</span>
+                        </span>
+                        <span className="block my-1">&</span>
+                        <span className="block">
+                            <span className="hidden sm:block">invite you to join us as we weave</span>
+                            <span className="hidden sm:block">our lives together under their gentle light.</span>
+                            <span className="hidden sm:block">Your presence will make our day truly magical.</span>
+                            <span className="sm:hidden">invite you to join us as we</span>
+                            <span className="sm:hidden">weave our lives together</span>
+                            <span className="sm:hidden">under their gentle light.</span><br />
+                            <span className="sm:hidden">Your presence will make our</span>
+                            <span className="sm:hidden">day truly magical.</span>
+                        </span>
                     </p>
 
                     {/* Countdown - Eye Catching */}
@@ -74,7 +98,7 @@ export default async function GuestInvitation({ params }) {
                         <Countdown />
                     </div>
 
-                    {/* Scroll Indicator */}
+                    Scroll Indicator
                     <div className="mt-12 sm:mt-16 flex flex-col items-center gap-2 animate-pulse">
                         <p className="text-sm text-[#6b4f3f]/60 uppercase tracking-widest">Scroll to explore</p>
                         <svg className="w-6 h-6 text-[#4f6f2f]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -87,6 +111,12 @@ export default async function GuestInvitation({ params }) {
             {/* Event Details Section */}
             <section className="min-h-screen flex flex-col items-center justify-center px-4 py-16 sm:py-20 relative z-10">
                 <div className="absolute inset-0 pointer-events-none z-0">
+                    <div className="absolute left-2 bottom-6 sm:hidden opacity-70">
+                        <img src="/LeftSide2.png" alt="" className="h-40 w-auto mix-blend-multiply" />
+                    </div>
+                    <div className="absolute right-2 bottom-6 sm:hidden opacity-80">
+                        <img src="/RightSide2.png" alt="" className="h-40 w-auto mix-blend-multiply" />
+                    </div>
                     <div className="absolute left-10 bottom-0 hidden xl:block opacity-90">
                         <img src="/LeftSide2.png" alt="" className="h-[520px] w-auto mix-blend-multiply opacity-90" />
                     </div>
