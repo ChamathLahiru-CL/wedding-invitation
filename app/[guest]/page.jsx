@@ -11,10 +11,18 @@ const greatVibes = Great_Vibes({
 export default async function GuestInvitation({ params }) {
     const { guest } = await params;
 
-    const guestName = guest
-        .split("-")
-        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-        .join(" ");
+    let guestName;
+    if (guest.includes("-and-")) {
+        const parts = guest.split("-and-");
+        guestName = parts
+            .map((part) => part.split("-").map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(" "))
+            .join(" & ");
+    } else {
+        guestName = guest
+            .split("-")
+            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(" ");
+    }
 
     return (
         <main className="bg-[#f8f5ef] relative overflow-hidden">
