@@ -1,6 +1,7 @@
 import Countdown from "../components/Countdown";
 import EventDetails from "../components/EventDetails";
 import RSVPForm from "../components/RSVPForm";
+import PhotoAlbum from "../components/PhotoAlbum";
 import { Great_Vibes, Playfair_Display, Inter } from "next/font/google";
 
 const greatVibes = Great_Vibes({
@@ -44,7 +45,7 @@ export default async function GuestInvitation({ params }) {
             ></div>
             <div className="fixed inset-0 bg-gradient-to-b from-[#f8f5ef]/18 via-[#f8f5ef]/14 to-[#f8f5ef]/22 pointer-events-none z-0"></div>
             {/* Hero Section - Full Viewport */}
-            <section className="min-h-screen flex flex-col items-center justify-start px-2 sm:px-4 py-6 sm:py-8 relative overflow-hidden z-10">
+            <section className="sm:min-h-screen flex flex-col items-center justify-start px-2 sm:px-4 py-6 sm:py-8 relative overflow-hidden z-10">
                 {/* Decorative Elements */}
                 <div className="hidden sm:block absolute top-10 left-5 w-8 h-8 text-[#4f6f2f] opacity-40 text-3xl animate-bounce">🌿</div>
                 <div className="hidden sm:block absolute top-20 right-8 w-8 h-8 text-[#d4a574] opacity-40 text-3xl" style={{ animation: "bounce 2s infinite 0.3s" }}>✨</div>
@@ -128,7 +129,7 @@ export default async function GuestInvitation({ params }) {
             </section>
 
             {/* Event Details Section */}
-            <section className="min-h-screen flex flex-col items-center justify-center px-4 py-16 sm:py-20 relative z-10">
+            <section className="flex flex-col items-center justify-center px-4 pt-4 pb-6 sm:pt-6 sm:pb-8 relative z-10">
                 <div className="absolute inset-0 pointer-events-none z-0">
                     <div className="absolute left-2 bottom-6 sm:hidden opacity-70">
                         <img src="/LeftSide2.png" alt="" className="h-40 w-auto mix-blend-multiply" />
@@ -147,6 +148,9 @@ export default async function GuestInvitation({ params }) {
                     <EventDetails />
                 </div>
             </section>
+
+            {/* Photo Album Section */}
+            <PhotoAlbum />
 
             {/* RSVP Section */}
             <section className="min-h-screen flex flex-col items-center justify-center px-4 py-16 sm:py-20 relative z-10">
@@ -200,5 +204,4 @@ export default async function GuestInvitation({ params }) {
             `}</style>
         </main>
     );
-
 }

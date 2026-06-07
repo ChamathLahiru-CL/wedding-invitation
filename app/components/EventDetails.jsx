@@ -1,7 +1,7 @@
 export default function EventDetails() {
     return (
-        <section className="py-14 sm:py-20 text-center px-4 sm:px-6">
-            <h2 className="text-3xl sm:text-4xl font-bold text-[#4f6f2f] mb-10 sm:mb-12">
+        <section className="py-6 sm:py-8 text-center px-4 sm:px-6">
+            <h2 className="text-3xl sm:text-4xl font-bold text-[#4f6f2f] mb-6 sm:mb-8">
                 The Ceremony & Celebration
             </h2>
 
