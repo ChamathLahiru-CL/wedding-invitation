@@ -1,11 +1,22 @@
 import Countdown from "../components/Countdown";
 import EventDetails from "../components/EventDetails";
 import RSVPForm from "../components/RSVPForm";
-import { Great_Vibes } from "next/font/google";
+import { Great_Vibes, Playfair_Display, Inter } from "next/font/google";
 
 const greatVibes = Great_Vibes({
     weight: "400",
     subsets: ["latin"],
+});
+
+const playfairDisplay = Playfair_Display({
+    weight: ["700"],
+    subsets: ["latin"],
+});
+
+const inter = Inter({
+    weight: ["400", "500", "700"],
+    subsets: ["latin"],
+    display: "swap",
 });
 
 export default async function GuestInvitation({ params }) {
@@ -33,7 +44,7 @@ export default async function GuestInvitation({ params }) {
             ></div>
             <div className="fixed inset-0 bg-gradient-to-b from-[#f8f5ef]/18 via-[#f8f5ef]/14 to-[#f8f5ef]/22 pointer-events-none z-0"></div>
             {/* Hero Section - Full Viewport */}
-            <section className="min-h-screen flex flex-col items-center justify-center px-2 sm:px-4 py-12 sm:py-20 relative overflow-hidden z-10">
+            <section className="min-h-screen flex flex-col items-center justify-start px-2 sm:px-4 py-6 sm:py-8 relative overflow-hidden z-10">
                 {/* Decorative Elements */}
                 <div className="hidden sm:block absolute top-10 left-5 w-8 h-8 text-[#4f6f2f] opacity-40 text-3xl animate-bounce">🌿</div>
                 <div className="hidden sm:block absolute top-20 right-8 w-8 h-8 text-[#d4a574] opacity-40 text-3xl" style={{ animation: "bounce 2s infinite 0.3s" }}>✨</div>
@@ -58,29 +69,29 @@ export default async function GuestInvitation({ params }) {
                         <img src="/RightSide.png" alt="" className="h-[520px] w-auto mix-blend-multiply opacity-90" />
                     </div>
                     {/* Greeting */}
-                    <div className="mb-4 flex justify-center animate-fadeIn">
-                        <p className={`${greatVibes.className} text-[#7b2027] text-3xl sm:text-5xl md:text-6xl lg:text-7xl leading-none drop-shadow-[0_8px_18px_rgba(50,34,28,0.12)]`}>
+                    <div className="mb-1 flex justify-center animate-fadeIn">
+                        <p className={`${greatVibes.className} text-[#7b2027] text-3xl sm:text-5xl md:text-6xl lg:text-7xl leading-none drop-shadow-[0_4px_8px_rgba(50,34,28,0.06)]`}>
                             Dear {guestName},
                         </p>
                     </div>
 
-                    <div className="flex justify-center mb-3 animate-fadeIn" style={{ animationDelay: "0.15s" }}>
+                    <div className="flex justify-center mb-1 animate-fadeIn" style={{ animationDelay: "0.15s" }}>
                         <img
                             src="/headerSection.png"
                             alt=""
-                            className="w-52 sm:w-64 md:w-80 lg:w-96 h-auto opacity-95 drop-shadow-[0_18px_36px_rgba(50,34,28,0.14)]"
+                            className="w-52 sm:w-64 md:w-80 lg:w-96 h-auto opacity-95 drop-shadow-[0_10px_20px_rgba(50,34,28,0.08)]"
                         />
                     </div>
 
                     {/* Couple Names - Main Focus */}
-                    <h1 className="text-2xl sm:text-6xl md:text-7xl font-bold mb-2 animate-fadeIn whitespace-normal sm:whitespace-nowrap leading-tight" style={{ animationDelay: "0.25s" }}>
-                        <span className="block sm:inline text-[#4f6f2f]">Thejani</span>
-                        <span className="block sm:inline sm:mx-2 md:mx-3 text-xl sm:text-5xl md:text-7xl text-[#d4a574]">&</span>
-                        <span className="block sm:inline text-[#4f6f2f]">Dhanushka</span>
+                    <h1 className={`${playfairDisplay.className} text-3xl sm:text-7xl md:text-8xl mb-1 animate-fadeIn animate-glowPulse whitespace-normal sm:whitespace-nowrap leading-tight`} style={{ animationDelay: "0.25s" }}>
+                        <span className="block sm:inline bg-gradient-to-r from-[#4f6f2f] via-[#5a7f3b] to-[#4f6f2f] bg-clip-text text-transparent drop-shadow-sm" style={{ textShadow: "0 0 6px rgba(79, 111, 47, 0.14)" }}>Thejani</span>
+                        <span className="block sm:inline sm:mx-2 md:mx-3 text-2xl sm:text-6xl md:text-7xl bg-gradient-to-r from-[#d4a574] to-[#e6b88a] bg-clip-text text-transparent" style={{ textShadow: "0 0 6px rgba(212, 165, 116, 0.16)" }}>&</span>
+                        <span className="block sm:inline bg-gradient-to-r from-[#4f6f2f] via-[#5a7f3b] to-[#4f6f2f] bg-clip-text text-transparent drop-shadow-sm" style={{ textShadow: "0 0 6px rgba(79, 111, 47, 0.14)" }}>Dhanushka</span>
                     </h1>
 
                     {/* Invitation Text */}
-                    <p className="mt-4 sm:mt-8 text-sm sm:text-lg md:text-xl text-[#6b4f3f] font-light mb-8 sm:mb-12 animate-fadeIn px-4 sm:px-0 leading-relaxed" style={{ animationDelay: "0.4s" }}>
+                    <p className={`${inter.className} mt-3 sm:mt-6 text-sm sm:text-lg md:text-xl text-[#6b4f3f] font-light mb-6 sm:mb-10 animate-fadeIn px-4 sm:px-0 leading-relaxed`} style={{ animationDelay: "0.4s" }}>
                         <span className="block">
                             <span className="hidden sm:block">"With hearts full of love,</span>
                             <span className="hidden sm:block">we step into forever beneath the stars."</span>
@@ -106,7 +117,7 @@ export default async function GuestInvitation({ params }) {
                         <Countdown />
                     </div>
 
-                    Scroll Indicator
+                    {/* Scroll Indicator */}
                     <div className="mt-12 sm:mt-16 flex flex-col items-center gap-2 animate-pulse">
                         <p className="text-sm text-[#6b4f3f]/60 uppercase tracking-widest">Scroll to explore</p>
                         <svg className="w-6 h-6 text-[#4f6f2f]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -170,6 +181,21 @@ export default async function GuestInvitation({ params }) {
 
                 .animate-pulse {
                     animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+                }
+
+                @keyframes glowPulse {
+                    0%, 100% {
+                        filter: drop-shadow(0 0 6px rgba(79, 111, 47, 0.22)) drop-shadow(0 0 3px rgba(212, 165, 116, 0.1));
+                        text-shadow: 0 0 6px rgba(79, 111, 47, 0.12), 0 0 4px rgba(212, 165, 116, 0.08);
+                    }
+                    50% {
+                        filter: drop-shadow(0 0 8px rgba(79, 111, 47, 0.28)) drop-shadow(0 0 4px rgba(212, 165, 116, 0.12));
+                        text-shadow: 0 0 8px rgba(79, 111, 47, 0.18), 0 0 6px rgba(212, 165, 116, 0.1);
+                    }
+                }
+
+                .animate-glowPulse {
+                    animation: glowPulse 3s ease-in-out infinite;
                 }
             `}</style>
         </main>
