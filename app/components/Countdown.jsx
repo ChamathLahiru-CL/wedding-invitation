@@ -98,7 +98,7 @@ export default function Countdown() {
   return (
     <>
       <style>{countdownStyles}</style>
-      <div className="mt-8 sm:mt-16 flex justify-center gap-2 sm:gap-4 px-2 sm:px-4 flex-wrap">
+      <div className="mt-8 sm:mt-16 grid grid-cols-4 gap-1.5 sm:flex sm:justify-center sm:gap-4 px-2 sm:px-4 w-full max-w-[360px] sm:max-w-none mx-auto">
         {[
           ["Days", timeLeft.days],
           ["Hours", timeLeft.hours],
@@ -107,14 +107,14 @@ export default function Countdown() {
         ].map(([label, value]) => (
           <div
             key={label}
-            className="countdown-box group relative w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-2xl sm:rounded-3xl bg-gradient-to-br from-white/95 via-white/90 to-white/85 backdrop-blur-md shadow-[0_12px_28px_rgba(107,79,63,0.14)] hover:shadow-[0_18px_36px_rgba(107,79,63,0.18)] hover:scale-[1.06] transition-all duration-300 ease-out flex flex-col items-center justify-center border border-white/40 overflow-hidden cursor-pointer"
+            className="countdown-box group relative w-full h-16 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-xl sm:rounded-3xl bg-gradient-to-br from-white/95 via-white/90 to-white/85 backdrop-blur-md shadow-[0_12px_28px_rgba(107,79,63,0.14)] hover:shadow-[0_18px_36px_rgba(107,79,63,0.18)] hover:scale-[1.06] transition-all duration-300 ease-out flex flex-col items-center justify-center border border-white/40 overflow-hidden cursor-pointer"
           >
             <div className="absolute inset-0 bg-gradient-to-tr from-[#4f6f2f]/5 to-[#d4a574]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             <div className="relative z-10 flex flex-col items-center justify-center h-full">
-              <p className={`countdown-number text-3xl sm:text-4xl md:text-5xl font-semibold tracking-wide ${playfair.className} text-[#4f6f2f]`}>
+              <p className={`countdown-number text-2xl sm:text-4xl md:text-5xl font-semibold tracking-wide ${playfair.className} text-[#4f6f2f]`}>
                 {value.toString().padStart(2, '0')}
               </p>
-              <p className="text-[10px] sm:text-xs md:text-sm tracking-widest uppercase font-bold text-[#6b4f3f] mt-2 group-hover:text-[#4f6f2f] transition-colors duration-300">
+              <p className="text-[9px] sm:text-xs md:text-sm tracking-wider uppercase font-bold text-[#6b4f3f] mt-1 sm:mt-2 group-hover:text-[#4f6f2f] transition-colors duration-300">
                 {label}
               </p>
             </div>
