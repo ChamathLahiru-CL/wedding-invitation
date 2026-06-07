@@ -1,6 +1,7 @@
 import Countdown from "../components/Countdown";
 import EventDetails from "../components/EventDetails";
 import RSVPForm from "../components/RSVPForm";
+import PhotoAlbum from "../components/PhotoAlbum";
 import { Great_Vibes, Playfair_Display, Inter } from "next/font/google";
 
 const greatVibes = Great_Vibes({
@@ -44,7 +45,7 @@ export default async function GuestInvitation({ params }) {
             ></div>
             <div className="fixed inset-0 bg-gradient-to-b from-[#f8f5ef]/18 via-[#f8f5ef]/14 to-[#f8f5ef]/22 pointer-events-none z-0"></div>
             {/* Hero Section - Full Viewport */}
-            <section className="min-h-screen flex flex-col items-center justify-start px-2 sm:px-4 py-6 sm:py-8 relative overflow-hidden z-10">
+            <section className="sm:min-h-screen flex flex-col items-center justify-start px-2 sm:px-4 py-6 sm:py-8 relative overflow-hidden z-10">
                 {/* Decorative Elements */}
                 <div className="hidden sm:block absolute top-10 left-5 w-8 h-8 text-[#4f6f2f] opacity-40 text-3xl animate-bounce">🌿</div>
                 <div className="hidden sm:block absolute top-20 right-8 w-8 h-8 text-[#d4a574] opacity-40 text-3xl" style={{ animation: "bounce 2s infinite 0.3s" }}>✨</div>
@@ -54,19 +55,19 @@ export default async function GuestInvitation({ params }) {
                 <div className="text-center max-w-5xl w-full z-10">
 
                     {/* Side background images (decorative) */}
-                    <div className="absolute left-3 top-1/2 -translate-y-1/2 sm:hidden z-0 pointer-events-none select-none opacity-70">
+                    <div className="fixed left-3 top-1/2 -translate-y-1/2 sm:hidden z-0 pointer-events-none select-none opacity-40">
                         <img src="/LeftSide.png" alt="" className="h-40 w-auto mix-blend-multiply" />
                     </div>
-                    <div className="absolute right-3 top-1/2 -translate-y-1/2 sm:hidden z-0 pointer-events-none select-none opacity-75">
+                    <div className="fixed right-3 top-1/2 -translate-y-1/2 sm:hidden z-0 pointer-events-none select-none opacity-40">
                         <img src="/RightSide.png" alt="" className="h-40 w-auto mix-blend-multiply" />
                     </div>
 
-                    <div className="absolute left-12 top-1/2 -translate-y-1/2 hidden lg:block z-0 pointer-events-none select-none opacity-90">
-                        <img src="/LeftSide.png" alt="" className="h-[520px] w-auto mix-blend-multiply opacity-90" />
+                    <div className="fixed left-12 top-1/2 -translate-y-1/2 hidden lg:block z-0 pointer-events-none select-none opacity-40">
+                        <img src="/LeftSide.png" alt="" className="h-[520px] w-auto mix-blend-multiply" />
                     </div>
 
-                    <div className="absolute right-12 top-1/2 -translate-y-1/2 hidden lg:block z-0 pointer-events-none select-none opacity-90">
-                        <img src="/RightSide.png" alt="" className="h-[520px] w-auto mix-blend-multiply opacity-90" />
+                    <div className="fixed right-12 top-1/2 -translate-y-1/2 hidden lg:block z-0 pointer-events-none select-none opacity-40">
+                        <img src="/RightSide.png" alt="" className="h-[520px] w-auto mix-blend-multiply" />
                     </div>
                     {/* Greeting */}
                     <div className="mb-1 flex justify-center animate-fadeIn">
@@ -79,7 +80,7 @@ export default async function GuestInvitation({ params }) {
                         <img
                             src="/headerSection.png"
                             alt=""
-                            className="w-52 sm:w-64 md:w-80 lg:w-96 h-auto opacity-95 drop-shadow-[0_10px_20px_rgba(50,34,28,0.08)]"
+                            className="w-40 sm:w-52 md:w-64 lg:w-80 h-auto opacity-95 drop-shadow-[0_10px_20px_rgba(50,34,28,0.08)]"
                         />
                     </div>
 
@@ -95,20 +96,22 @@ export default async function GuestInvitation({ params }) {
                         <span className="block">
                             <span className="hidden sm:block">"With hearts full of love,</span>
                             <span className="hidden sm:block">we step into forever beneath the stars."</span>
-                            <span className="sm:hidden">With hearts full of love,</span>
-                            <span className="sm:hidden">we step into forever</span>
-                            <span className="sm:hidden">beneath the stars."</span>
+
+                            <span className="block sm:hidden">"With hearts full of love,</span>
+                            <span className="block sm:hidden">we step into forever</span>
+                            <span className="block sm:hidden">beneath the stars."</span>
                         </span>
-                        <span className="block my-1">&</span>
+                        <span className="block my-2 sm:my-3">&</span>
                         <span className="block">
                             <span className="hidden sm:block">invite you to join us as we weave</span>
                             <span className="hidden sm:block">our lives together under their gentle light.</span>
                             <span className="hidden sm:block">Your presence will make our day truly magical.</span>
-                            <span className="sm:hidden">invite you to join us as we</span>
-                            <span className="sm:hidden">weave our lives together</span>
-                            <span className="sm:hidden">under their gentle light.</span><br />
-                            <span className="sm:hidden">Your presence will make our</span>
-                            <span className="sm:hidden">day truly magical.</span>
+
+                            <span className="block sm:hidden">invite you to join us as we</span>
+                            <span className="block sm:hidden">weave our lives together</span>
+                            <span className="block sm:hidden">under their gentle light.</span>
+                            <span className="block sm:hidden mt-2">Your presence will make our</span>
+                            <span className="block sm:hidden">day truly magical.</span>
                         </span>
                     </p>
 
@@ -128,25 +131,28 @@ export default async function GuestInvitation({ params }) {
             </section>
 
             {/* Event Details Section */}
-            <section className="min-h-screen flex flex-col items-center justify-center px-4 py-16 sm:py-20 relative z-10">
+            <section className="flex flex-col items-center justify-center px-4 pt-4 pb-6 sm:pt-6 sm:pb-8 relative z-10">
                 <div className="absolute inset-0 pointer-events-none z-0">
-                    <div className="absolute left-2 bottom-6 sm:hidden opacity-70">
+                    {/* <div className="absolute left-2 bottom-4 sm:hidden opacity-70">
                         <img src="/LeftSide2.png" alt="" className="h-40 w-auto mix-blend-multiply" />
                     </div>
-                    <div className="absolute right-2 bottom-6 sm:hidden opacity-80">
+                    <div className="absolute right-2 bottom-4 sm:hidden opacity-80">
                         <img src="/RightSide2.png" alt="" className="h-40 w-auto mix-blend-multiply" />
-                    </div>
-                    <div className="absolute left-10 bottom-0 hidden xl:block opacity-90">
+                    </div> */}
+                    {/* <div className="absolute left-10 bottom-0 hidden xl:block opacity-90">
                         <img src="/LeftSide2.png" alt="" className="h-[520px] w-auto mix-blend-multiply opacity-90" />
                     </div>
                     <div className="absolute right-10 bottom-0 hidden xl:block opacity-90">
                         <img src="/RightSide2.png" alt="" className="h-[520px] w-auto mix-blend-multiply opacity-90" />
-                    </div>
+                    </div> */}
                 </div>
                 <div className="relative z-10 w-full">
                     <EventDetails />
                 </div>
             </section>
+
+            {/* Photo Album Section */}
+            <PhotoAlbum />
 
             {/* RSVP Section */}
             <section className="min-h-screen flex flex-col items-center justify-center px-4 py-16 sm:py-20 relative z-10">
@@ -200,5 +206,4 @@ export default async function GuestInvitation({ params }) {
             `}</style>
         </main>
     );
-
 }
