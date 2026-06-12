@@ -1,55 +1,89 @@
+"use client";
+import { useState } from "react";
+import { motion } from "framer-motion";
+
 export default function EventDetails() {
     const calendarUrl = "https://calendar.google.com/calendar/render?action=TEMPLATE&text=Wedding%20of%20Thejani%20%26%20Dhanushka&dates=20260803T043000Z/20260803T103000Z&details=Join%20us%20to%20celebrate%20our%20wedding!&location=Hotel%20Ramrich,%20Temple%20Road,%20Ekala,%20Ja-Ela";
 
+    const [activeTab, setActiveTab] = useState("The Wedding Day");
+
+    const tabs = ["The Day Before", "The Wedding Day", "The Day After"];
+
+    const events = {
+        "The Day Before": [
+            { name: "Event One", time: "03:00 PM" },
+            { name: "Event Two", time: "05:00 PM" },
+            { name: "Event Three", time: "08:00 PM" }
+        ],
+        "The Wedding Day": [
+            { name: "The Ceremony", time: "10:00 AM", location: "Hotel Ramrich, Temple Road, Ekala", link: calendarUrl },
+            { name: "The Celebration", time: "11:30 AM", location: "Hotel Ramrich, Temple Road, Ekala", link: calendarUrl },
+            { name: "Farewell", time: "04:00 PM", location: "Hotel Ramrich, Temple Road, Ekala", link: calendarUrl }
+        ],
+        "The Day After": [
+            { name: "Event One", time: "03:00 PM" },
+            { name: "Event Two", time: "05:00 PM" },
+            { name: "Event Three", time: "08:00 PM" }
+        ]
+    };
+
     return (
-        <section className="py-4 sm:py-8 text-center px-4 sm:px-6">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#4f6f2f] mb-4 sm:mb-8">
-                The Ceremony & Celebration
-            </h2>
+        <section className="py-20 sm:py-32 text-center px-4 sm:px-6 relative bg-white">
+            <motion.h2 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8 }}
+                className="text-3xl sm:text-4xl lg:text-5xl font-cormorant text-[#2C2C2C] mb-12 font-light tracking-wide"
+            >
+                The Plans
+            </motion.h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-6 lg:gap-8 max-w-5xl mx-auto">
-                <a
-                    href={calendarUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="bg-white/80 rounded-2xl sm:rounded-3xl shadow p-4 sm:p-8 lg:p-10 block hover:bg-white hover:scale-[1.02] hover:shadow-xl transition-all duration-300 cursor-pointer group"
+            <div className="max-w-4xl mx-auto">
+                <motion.div 
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, delay: 0.2 }}
+                    className="flex justify-center gap-4 sm:gap-12 mb-12 border-b border-[#E8DCC4] overflow-x-auto pb-4"
                 >
-                    <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-[#6b4f3f]">Aug 3rd(Monday), 2026</h3>
-                    <p className="mt-1 sm:mt-2 text-xs sm:text-sm lg:text-base text-[#9b7b68]">Save the Date</p>
-                    {/* <p className="mt-2 sm:mt-3 text-[10px] sm:text-xs text-[#4f6f2f] font-semibold opacity-70 group-hover:opacity-100 transition-opacity">
-                        Add to Calendar 📅
-                    </p> */}
-                </a>
+                    {tabs.map(tab => (
+                        <button
+                            key={tab}
+                            onClick={() => setActiveTab(tab)}
+                            className={`text-sm tracking-widest uppercase pb-2 transition-colors whitespace-nowrap ${activeTab === tab ? "text-[#A39171] border-b-2 border-[#A39171]" : "text-[#8C7A6B] hover:text-[#2C2C2C]"}`}
+                        >
+                            {tab}
+                        </button>
+                    ))}
+                </motion.div>
 
-                <a
-                    href={calendarUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="bg-white/80 rounded-2xl sm:rounded-3xl shadow p-4 sm:p-8 lg:p-10 block hover:bg-white hover:scale-[1.02] hover:shadow-xl transition-all duration-300 cursor-pointer group"
+                <motion.div 
+                    key={activeTab}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
+                    className="flex flex-col gap-8 max-w-2xl mx-auto"
                 >
-                    <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-[#6b4f3f]">10:00 AM to 4:00 PM</h3>
-                    <p className="mt-1 sm:mt-2 text-xs sm:text-sm lg:text-base text-[#9b7b68]">The Golden Hour</p>
-                    <p className="mt-2 sm:mt-3 text-[10px] sm:text-xs text-[#4f6f2f] font-semibold opacity-70 group-hover:opacity-100 transition-opacity">
-                        Add to Calendar
-                    </p>
-                </a>
-
-                <a
-                    href="https://maps.app.goo.gl/CQ5w2sjxXyz4ULY4A"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="bg-white/80 rounded-2xl sm:rounded-3xl shadow p-4 sm:p-8 lg:p-10 block hover:bg-white hover:scale-[1.02] hover:shadow-xl transition-all duration-300 cursor-pointer group"
-                >
-                    <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-[#6b4f3f]">
-                        Hotel Ramrich
-                    </h3>
-                    <p className="mt-1 sm:mt-2 text-xs sm:text-sm lg:text-base text-[#9b7b68]">
-                        Temple Road, Ekala, Ja-Ela
-                    </p>
-                    <p className="mt-2 sm:mt-3 text-[10px] sm:text-xs text-[#4f6f2f] font-semibold opacity-70 group-hover:opacity-100 transition-opacity">
-                        View Map ↗
-                    </p>
-                </a>
+                    {events[activeTab].map((event, index) => (
+                        <motion.div 
+                            key={index}
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.5, delay: index * 0.1 }}
+                            className="flex flex-col sm:flex-row justify-between items-center sm:items-start border-b border-[#E8DCC4]/50 pb-8 last:border-0 hover:-translate-y-1 transition-transform duration-300"
+                        >
+                            <div className="text-center sm:text-left mb-4 sm:mb-0">
+                                <h3 className="text-2xl font-cormorant text-[#2C2C2C] font-light mb-2">{event.name}</h3>
+                                {event.location && <p className="text-sm text-[#5A5A5A] font-light">{event.location}</p>}
+                                {event.link && <a href={event.link} target="_blank" rel="noopener noreferrer" className="text-[10px] text-[#A39171] uppercase tracking-[0.2em] mt-2 block hover:underline">Add to Calendar</a>}
+                            </div>
+                            <div className="text-[#A39171] font-light tracking-widest text-sm">
+                                {event.time}
+                            </div>
+                        </motion.div>
+                    ))}
+                </motion.div>
             </div>
         </section>
     );
