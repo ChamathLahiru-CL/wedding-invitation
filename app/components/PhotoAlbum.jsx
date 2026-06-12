@@ -1,89 +1,88 @@
 "use client";
-import { useState, useEffect } from "react";
+
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 const images = [
-    "/image 1.jpeg",
-    "/image 1 - Copy (2).jpeg",
-    "/image 1 - Copy.jpeg"
+  { src: "/couple-photo.jpg", rotate: -3, y: 10 },
+  { src: "/image 2.jpeg", rotate: 2, y: -20 },
+  { src: "/image 1 - Copy.jpeg", rotate: -1, y: 15 },
+  { src: "/image 1 - Copy (2).jpeg", rotate: 4, y: -10 },
+  { src: "/image 1.jpeg", rotate: -2, y: 5 },
+  { src: "/image 2.jpeg", rotate: 3, y: -15 },
 ];
 
 export default function PhotoAlbum() {
-    const [currentIndex, setCurrentIndex] = useState(0);
+  return (
+    <section className="py-24 sm:py-32 bg-[#FAF9F6] px-4 sm:px-6 overflow-hidden">
+      <div className="max-w-6xl mx-auto">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+          className="text-center mb-24"
+        >
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-cormorant text-[#2C2C2C] font-light tracking-wide mb-4">
+            Captured Moments
+          </h2>
+          <p className="text-[#8C7A6B] text-sm tracking-widest uppercase font-light">A glimpse into our journey</p>
+        </motion.div>
 
-    useEffect(() => {
-        const timer = setInterval(() => {
-            setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-        }, 4000); // Change photo every 4 seconds
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-12 lg:gap-16 items-center justify-center">
+          {images.map((img, index) => (
+            <motion.div 
+              key={index} 
+              initial={{ opacity: 0, y: 100, rotate: 0 }}
+              whileInView={{ opacity: 1, y: img.y, rotate: img.rotate }}
+              whileHover={{ 
+                scale: 1.05, 
+                rotate: 0, 
+                y: img.y - 10,
+                zIndex: 50,
+                transition: { duration: 0.4, ease: "easeOut" }
+              }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ 
+                duration: 1, 
+                delay: index * 0.1, 
+                ease: [0.25, 1, 0.5, 1] 
+              }}
+              className="relative aspect-[4/5] w-full max-w-sm mx-auto bg-white p-3 sm:p-4 pb-12 sm:pb-16 shadow-[0_15px_35px_rgba(0,0,0,0.05)] hover:shadow-[0_25px_50px_rgba(0,0,0,0.1)] transition-shadow duration-500 rounded-sm cursor-crosshair group z-10"
+            >
+              <div className="relative w-full h-full overflow-hidden border border-[#E8DCC4]/30">
+                <Image
+                  src={img.src}
+                  alt={`Gallery moment ${index + 1}`}
+                  fill
+                  className="object-cover transition-transform duration-1000 group-hover:scale-110"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                />
+                <div className="absolute inset-0 bg-[#A39171]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              </div>
+              <div className="absolute bottom-4 left-0 w-full text-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                <span className="font-cormorant text-xl text-[#2C2C2C] italic tracking-wide">
+                  Memory {index + 1}
+                </span>
+              </div>
+            </motion.div>
+          ))}
+        </div>
 
-        return () => clearInterval(timer);
-    }, []);
-
-    return (
-        <section className="py-8 sm:py-14 md:py-20 text-center px-4 sm:px-6 w-full flex justify-center relative z-10">
-            <div className="max-w-5xl w-full">
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-[#4f6f2f] mb-6 sm:mb-10 md:mb-12 drop-shadow-sm">
-                    Captured Moments
-                </h2>
-
-                <div className="relative mx-auto w-[280px] min-[390px]:w-[340px] sm:w-[440px] md:w-[560px] h-[380px] min-[390px]:h-[460px] sm:h-[600px] md:h-[760px] rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl sm:shadow-2xl bg-white/80 border-4 sm:border-8 border-white/60 group">
-                    {images.map((src, index) => (
-                        <div
-                            key={index}
-                            className="absolute inset-0 transition-transform duration-1000 ease-in-out"
-                            style={{ transform: `translateX(${(index - currentIndex) * 100}%)` }}
-                        >
-                            <Image
-                                src={src}
-                                alt={`Wedding moment ${index + 1}`}
-                                fill
-                                className="object-cover"
-                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1000px"
-                                priority={index === 0}
-                            />
-                        </div>
-                    ))}
-
-                    {/* Decorative Corner Overlays */}
-                    <div className="absolute top-0 left-0 w-16 sm:w-24 md:w-32 h-16 sm:h-24 md:h-32 bg-gradient-to-br from-black/20 to-transparent z-20 pointer-events-none"></div>
-                    <div className="absolute bottom-0 right-0 w-16 sm:w-24 md:w-32 h-16 sm:h-24 md:h-32 bg-gradient-to-tl from-black/20 to-transparent z-20 pointer-events-none"></div>
-
-                    {/* Navigation Dots */}
-                    <div className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 flex gap-2 sm:gap-3 z-30">
-                        {images.map((_, index) => (
-                            <button
-                                key={index}
-                                onClick={() => setCurrentIndex(index)}
-                                className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all duration-300 shadow-sm ${index === currentIndex
-                                    ? "bg-white scale-125 shadow-md"
-                                    : "bg-white/50 hover:bg-white/80"
-                                    }`}
-                                aria-label={`Go to image ${index + 1}`}
-                            />
-                        ))}
-                    </div>
-
-                    {/* Next/Prev buttons visible on hover */}
-                    <button
-                        onClick={() => setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length)}
-                        className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-white/30 hover:bg-white/50 text-white p-1.5 sm:p-2 rounded-full backdrop-blur-sm transition-all opacity-100 md:opacity-0 group-hover:opacity-100 z-30 shadow-lg"
-                        aria-label="Previous image"
-                    >
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-4 h-4 sm:w-6 sm:h-6">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-                        </svg>
-                    </button>
-                    <button
-                        onClick={() => setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length)}
-                        className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-white/30 hover:bg-white/50 text-white p-1.5 sm:p-2 rounded-full backdrop-blur-sm transition-all opacity-100 md:opacity-0 group-hover:opacity-100 z-30 shadow-lg"
-                        aria-label="Next image"
-                    >
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="w-4 h-4 sm:w-6 sm:h-6">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-                        </svg>
-                    </button>
-                </div>
-            </div>
-        </section>
-    );
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+          className="mt-32 text-center max-w-3xl mx-auto"
+        >
+          <p className="text-xl sm:text-2xl md:text-3xl font-cormorant text-[#2C2C2C] leading-relaxed italic font-light relative">
+            <span className="text-4xl sm:text-6xl text-[#E8DCC4] absolute -top-8 -left-8 font-serif">"</span>
+            We can’t wait to see all of our beloved friends and relatives at our wedding. Your presence will make our day truly special!
+            <span className="text-4xl sm:text-6xl text-[#E8DCC4] absolute -bottom-10 -right-4 font-serif">"</span>
+          </p>
+        </motion.div>
+      </div>
+    </section>
+  );
 }

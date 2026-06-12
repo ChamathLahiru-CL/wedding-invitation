@@ -2,110 +2,152 @@
 
 import { useState } from "react";
 import { db } from "../../lib/firebase";
-import { doc, setDoc } from "firebase/firestore";
-import { getDoc } from "firebase/firestore";
+import { doc, setDoc, serverTimestamp, getDoc } from "firebase/firestore";
+import { motion } from "framer-motion";
 
-export default function RSVPForm({ guestName }) {
-    const [attending, setAttending] = useState("");
-    const [submitted, setSubmitted] = useState(false);
+export default function RSVPForm() {
+  const [formData, setFormData] = useState({ name: "", guests: 1, rsvp: "" });
+  const [submitStatus, setSubmitStatus] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState("");
 
-    async function handleSubmit(e) {
-        e.preventDefault();
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
-        const docRef = doc(
-            db,
-            "guests",
-            guestName.toLowerCase().replace(/ /g, "-")
-        );
+  async function handleSubmit(e) {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setError("");
 
-        const docSnap = await getDoc(docRef);
+    const docId = formData.name.toLowerCase().trim().replace(/ /g, "-");
 
-        if (docSnap.exists()) {
-            alert("You have already responded ❤️");
-            return;
-        }
+    try {
+      const docRef = doc(db, "guests", docId);
+      const docSnap = await getDoc(docRef);
 
-        try {
-            await setDoc(docRef, {
-                name: guestName,
-                attending: attending === "Accepted",
-                status: attending,
-                submittedAt: new Date().toISOString(),
-            });
+      if (docSnap.exists()) {
+        setError("You have already responded ❤️");
+        setIsSubmitting(false);
+        return;
+      }
 
-            setSubmitted(true);
-        } catch (error) {
-            console.error("RSVP save error:", error);
-        }
+      await setDoc(docRef, {
+        ...formData,
+        submittedAt: serverTimestamp(),
+      });
+
+      setSubmitStatus("success");
+    } catch (err) {
+      console.error("RSVP save error:", err);
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setIsSubmitting(false);
     }
+  }
 
-    return (
-        <section className="py-8 sm:py-28 px-3 sm:px-6">
-            <div className="w-full max-w-[360px] min-[390px]:max-w-[380px] sm:max-w-5xl mx-auto text-white rounded-2xl sm:rounded-[56px] p-5 min-[390px]:p-6 sm:p-12 md:p-16 text-center bg-gradient-to-br from-[#5e5349]/95 via-[#5a4a42]/92 to-[#4b4038]/95 backdrop-blur-xl border border-white/10 shadow-[0_20px_48px_rgba(50,34,28,0.24)] sm:shadow-[0_36px_90px_rgba(50,34,28,0.30)]">
-                <h2 className="text-2xl min-[390px]:text-3xl sm:text-4xl md:text-6xl font-bold mb-3 sm:mb-5">Confirm Your Presence</h2>
+  return (
+    <section className="py-20 sm:py-32 bg-white px-4 flex flex-col items-center overflow-hidden">
+      <motion.div 
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+        className="text-center mb-12 sm:mb-16"
+      >
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-cormorant text-[#2C2C2C] font-light tracking-wide">
+          Be Our Guest
+        </h2>
+        <p className="text-sm sm:text-base text-[#8C7A6B] mt-4 font-light italic">
+          We would love for you to join us
+        </p>
+      </motion.div>
 
-                <p className="mb-5 sm:mb-12 text-white/80 text-sm min-[390px]:text-base sm:text-lg md:text-xl">
-                    Kindly let us know by{" "}
-                    <span className="text-[#c9a768] font-bold">May 01, 2026</span>
-                </p>
-
-                {submitted ? (
-                    <p className="text-2xl font-bold text-[#d4af37]">
-                        Thank you! Your RSVP has been saved.
-                    </p>
-                ) : (
-                    <form onSubmit={handleSubmit}>
-                        <label className="block text-left text-xs min-[390px]:text-sm sm:text-base md:text-lg font-semibold text-[#c9a768] mb-2 tracking-widest">
-                            YOUR NAME(S)
-                        </label>
-
-                        <input
-                            value={guestName}
-                            readOnly
-                            className="w-full mb-5 sm:mb-12 rounded-2xl sm:rounded-3xl bg-white/10 border border-white/20 px-4 sm:px-7 py-3 sm:py-5 text-white text-sm min-[390px]:text-base sm:text-lg md:text-xl focus:outline-none focus:ring-2 focus:ring-[#d4af37]/40"
-                        />
-
-                        <label className="block text-left text-xs min-[390px]:text-sm sm:text-base md:text-lg font-semibold text-[#c9a768] mb-3 sm:mb-4 tracking-widest">
-                            WILL YOU JOIN THE DANCE?
-                        </label>
-
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-5 mb-6 sm:mb-12">
-                            <button
-                                type="button"
-                                onClick={() => setAttending("Accepted")}
-                                className={`rounded-2xl sm:rounded-3xl border px-4 sm:px-7 py-3 sm:py-5 font-semibold text-sm min-[390px]:text-base sm:text-lg md:text-xl transition-all duration-300 ${attending === "Accepted"
-                                    ? "bg-[#c9a768] text-[#4e3a33] shadow-[0_10px_24px_rgba(201,167,104,0.35)]"
-                                    : "bg-white/10 text-white hover:bg-white/15"
-                                    }`}
-                            >
-                                Joyfully Accept
-                            </button>
-
-                            <button
-                                type="button"
-                                onClick={() => setAttending("Declined")}
-                                className={`rounded-2xl sm:rounded-3xl border px-4 sm:px-7 py-3 sm:py-5 font-semibold text-sm min-[390px]:text-base sm:text-lg md:text-xl transition-all duration-300 ${attending === "Declined"
-                                    ? "bg-[#c9a768] text-[#4e3a33] shadow-[0_10px_24px_rgba(201,167,104,0.35)]"
-                                    : "bg-white/10 text-white hover:bg-white/15"
-                                    }`}
-                            >
-                                Regretfully Decline
-                            </button>
-                        </div>
-
-                        <button
-                            disabled={!attending}
-                            className="mb-1 w-full rounded-2xl sm:rounded-3xl bg-[#c9a768] py-3.5 sm:py-6 font-bold text-sm min-[390px]:text-base sm:text-lg md:text-xl text-[#4e3a33] shadow-[0_12px_28px_rgba(201,167,104,0.30)] sm:shadow-[0_18px_46px_rgba(201,167,104,0.35)] disabled:opacity-50 disabled:shadow-none"
-                        >
-                            Send RSVP
-                        </button>
-                        <p className="mt-4 sm:mt-8 text-white/80 text-sm min-[390px]:text-base sm:text-lg md:text-xl">
-                            For Further Information:{" "} <br />
-                            <span className="text-[#c9a768] font-bold">0726233387 (Theja) / 0776233387 (Dhanu) </span>
-                        </p>
-                    </form>
-                )}
+      {submitStatus === "success" ? (
+        <motion.div 
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          className="text-center bg-[#FAF9F6] border border-[#E8DCC4] p-12 sm:p-16 max-w-lg w-full"
+        >
+          <motion.div 
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ type: "spring", delay: 0.2 }}
+            className="w-16 h-16 mx-auto border border-[#A39171] rounded-full flex items-center justify-center mb-6"
+          >
+            <span className="text-[#A39171] text-2xl font-serif italic">✓</span>
+          </motion.div>
+          <h3 className="text-2xl sm:text-3xl font-cormorant text-[#2C2C2C] mb-4">Thank You!</h3>
+          <p className="text-[#5A5A5A] font-light">Your RSVP has been beautifully received.</p>
+        </motion.div>
+      ) : (
+        <motion.form 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          onSubmit={handleSubmit} 
+          className="w-full max-w-md flex flex-col gap-8"
+        >
+          {error && <p className="text-red-800 text-sm text-center font-light">{error}</p>}
+          
+          <div className="flex flex-col gap-8">
+            <div className="relative group">
+              <input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                placeholder=" "
+                required
+                className="w-full bg-transparent border-b border-[#D4CBB3] focus:border-[#A39171] py-3 px-2 text-[#2C2C2C] placeholder-transparent focus:outline-none transition-colors peer"
+              />
+              <label className="absolute left-2 top-3 text-[#8C7A6B] text-sm font-light transition-all peer-focus:-top-4 peer-focus:text-xs peer-focus:text-[#A39171] peer-valid:-top-4 peer-valid:text-xs peer-valid:text-[#8C7A6B]">
+                Your Name
+              </label>
             </div>
-        </section>
-    );
+
+            <div className="relative group">
+              <input
+                type="number"
+                name="guests"
+                value={formData.guests}
+                onChange={handleChange}
+                placeholder=" "
+                min="1"
+                required
+                className="w-full bg-transparent border-b border-[#D4CBB3] focus:border-[#A39171] py-3 px-2 text-[#2C2C2C] placeholder-transparent focus:outline-none transition-colors peer"
+              />
+              <label className="absolute left-2 top-3 text-[#8C7A6B] text-sm font-light transition-all peer-focus:-top-4 peer-focus:text-xs peer-focus:text-[#A39171] peer-valid:-top-4 peer-valid:text-xs peer-valid:text-[#8C7A6B]">
+                Number of Guests
+              </label>
+            </div>
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 mt-4">
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              type="submit"
+              onClick={() => setFormData({ ...formData, rsvp: "Joyfully Accept" })}
+              disabled={isSubmitting}
+              className="flex-1 border border-[#D4CBB3] bg-[#FAF9F6] text-[#2C2C2C] py-4 text-xs tracking-widest uppercase hover:border-[#A39171] hover:text-[#A39171] transition-all duration-300 disabled:opacity-50"
+            >
+              {isSubmitting && formData.rsvp === "Joyfully Accept" ? "Sending..." : "Joyfully Accept"}
+            </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              type="submit"
+              onClick={() => setFormData({ ...formData, rsvp: "Regretfully Decline" })}
+              disabled={isSubmitting}
+              className="flex-1 border border-[#D4CBB3] bg-transparent text-[#5A5A5A] py-4 text-xs tracking-widest uppercase hover:border-[#A39171] hover:text-[#A39171] transition-all duration-300 disabled:opacity-50"
+            >
+              {isSubmitting && formData.rsvp === "Regretfully Decline" ? "Sending..." : "Decline"}
+            </motion.button>
+          </div>
+        </motion.form>
+      )}
+    </section>
+  );
 }

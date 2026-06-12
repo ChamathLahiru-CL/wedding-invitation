@@ -1,15 +1,22 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Cormorant_Garamond, Poppins } from "next/font/google";
 import "./globals.css";
-import { Playfair_Display, Poppins } from "next/font/google";
 
-const playfair = Playfair_Display({ subsets: ["latin"] });
-const poppins = Poppins({ subsets: ["latin"], weight: ["400", "600"] });
+const cormorant = Cormorant_Garamond({ 
+  subsets: ["latin"], 
+  weight: ["300", "400", "500", "600", "700"],
+  variable: '--font-cormorant'
+});
+const poppins = Poppins({ subsets: ["latin"], weight: ["300", "400", "500", "600"] });
+
+import SmoothScroll from "./components/SmoothScroll";
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${poppins.className} bg-[#f8f5ef]`}>
-        {children}
+      <body className={`${poppins.className} ${cormorant.variable} bg-[#FAF9F6] text-[#333333] antialiased`}>
+        <SmoothScroll>
+          {children}
+        </SmoothScroll>
       </body>
     </html>
   );
